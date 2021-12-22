@@ -1,4 +1,4 @@
-import { makeMap } from "./make-map";
+import { makeMultiMap } from "./make-multi-map";
 
 export type JoinDataArgs<LeftRowType, RightRowType, IdType, OutputType> = {
     leftData: LeftRowType[],
@@ -19,11 +19,18 @@ export type JoinDataArgs<LeftRowType, RightRowType, IdType, OutputType> = {
     merge: (left: LeftRowType | undefined, right: RightRowType | undefined) => OutputType
 });
 
+/**
+ * Joins two lists of objects together on an id field extracted via the provided leftId and rightId arguments.
+ * This supports inner, left, right, and outer joins via the joinType arg. 
+ * You must provide a merge function which takes the left and right row as input and returns the newly merged row. 
+ * @param args 
+ * @returns 
+ */
 export function joinData<LeftRowType, RightRowType, IdType, OutputType>(
     args : JoinDataArgs<LeftRowType, RightRowType, IdType, OutputType>
 ) : OutputType[] {
     const { leftData, rightData, leftId, rightId, merge } = args;
-    const rightMap = makeMap(rightData, rightId);
+    const rightMap = makeMultiMap(rightData, rightId);
     const rightKeys = new Set(rightMap.keys());
     const result = leftData.flatMap(row => {
         const key = leftId(row);

@@ -1,3 +1,9 @@
+/**
+ * Iterates through
+ * @param data 
+ * @param keyFunc 
+ * @returns 
+ */
 export function firstUniqueRowBy<RowType>(data: RowType[], keyFunc: (row: RowType) => any) {
     const unique = new Set();
     const rows : RowType[] = [];

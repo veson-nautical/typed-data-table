@@ -1,4 +1,4 @@
-import { transformAsync, transformBatchAsync } from "../src";
+import { transformAsync, transformBatchAsync } from "../../src";
 
 test('transformAsync', async () => {
     const result = await transformAsync([1,2,3],

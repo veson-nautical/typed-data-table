@@ -1,4 +1,4 @@
-import { makeMap } from "./functions/make-map";
+import { makeMultiMap } from "./functions/make-multi-map";
 import { addColumn, addColumnAsync } from "./functions/add-column";
 import { joinData } from "./functions/join-data";
 import { transformAsync, transformBatchAsync } from "./functions/transform-async";
@@ -7,16 +7,22 @@ import { makeSingleMap } from "./functions/make-single-map";
 import { filterNulls } from "./functions/filter-nulls";
 import { firstUniqueRowBy } from "./functions/first-unique-row-by";
 
-
+/**
+ * A type-safe data structure for working with tabular data. It provides a fluent syntax to make adding columns and 
+ * transformations as consise as possible.
+ */
 export class Table<RowType> {
+    /**
+     * Stores the underlying data for the table
+     */
     data: RowType[];
 
     constructor(data: RowType[] | Table<RowType>) {
         this.data = data instanceof Table ? data.data : data;
     }
 
-    toMap<K>(keyFunc: (row: RowType) => K) {
-        return makeMap(this.data, keyFunc);
+    toMultiMap<K>(keyFunc: (row: RowType) => K) {
+        return makeMultiMap(this.data, keyFunc);
     }
 
     toSingleMap<K>(keyFunc: (row: RowType) => K) {

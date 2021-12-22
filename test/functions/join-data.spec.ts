@@ -1,4 +1,4 @@
-import { joinData } from "../src";
+import { joinData } from "../../src";
 
 const DataA = [{
     id: 1,

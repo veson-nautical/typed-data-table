@@ -3,7 +3,7 @@ export * from './functions/delete-column';
 export * from './functions/filter-nulls';
 export * from './functions/first-unique-row-by';
 export * from './functions/join-data';
-export * from './functions/make-map';
+export * from './functions/make-multi-map';
 export * from './functions/make-single-map';
 export * from './functions/transform-async';
 export * from './Table';
