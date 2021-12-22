@@ -1,13 +1,19 @@
 {
     "name": "typed-data-table",
-    "description": "A strongly typed data structure for tabular data",
     "version": "1.0.3",
+    "description": "A strongly typed data structure for tabular data",
     "source": "src/index.ts",
     "main": "build/lib/index.js",
     "exports": "build/lib/index.modern.js",
     "module": "build/lib/index.es.js",
     "typings": "build/types/index.d.ts",
     "license": "See License in LICENSE",
+    "homepage": "https://github.com/mshafir/typed-data-table",
+    "author": "Michael Shafir <mshafir@veson.com>",
+    "repository": "github:mshafir/typed-data-table",
+    "engines": {
+        "node": ">=12.0.0"
+    },
     "scripts": {
         "build": "microbundle",
         "test": "jest",
