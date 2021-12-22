@@ -1,6 +1,6 @@
 
 /**
- * Transforms a list of objects into an Map from key to list of object.
+ * Groups a list of objects into an Map keyed by the provided keyFunc with values being sub-lists of the input data.
  * @param data The list of objects to transform
  * @param keyFunc The function to use to extract the keys for the output Map
  * @param valueFunc (Optional) a value function to transform the objects for the value list

@@ -1,4 +1,5 @@
 export * from './functions/add-column';
+export * from './functions/aggregate';
 export * from './functions/delete-column';
 export * from './functions/filter-nulls';
 export * from './functions/first-unique-row-by';
