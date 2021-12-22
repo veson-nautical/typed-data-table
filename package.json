@@ -1,0 +1,30 @@
+{
+    "name": "typed-data-table",
+    "description": "A strongly typed data structure for tabular data",
+    "version": "1.0.0",
+    "source": "src/index.ts",
+    "main": "build/lib/index.js",
+    "exports": "build/lib/index.modern.js",
+    "module": "build/lib/index.es.js",
+    "typings": "build/types/index.d.ts",
+    "license": "See License in LICENSE",
+    "scripts": {
+        "build": "microbundle",
+        "test": "jest",
+        "doc": "typedoc src/index.ts"
+    },
+    "dependencies": {
+        "es6-promise-pool": "~2.5.0",
+        "lodash.chunk": "~4.2.0"
+    },
+    "devDependencies": {
+        "@types/jest": "^27.0.3",
+        "@types/lodash.chunk": "~4.2.6",
+        "jest": "^27.4.5",
+        "microbundle": "^0.14.2",
+        "ts-jest": "^27.1.2",
+        "tslib": "^2.3.1",
+        "typedoc": "^0.22.10",
+        "typescript": "^4.5.4"
+    }
+}
