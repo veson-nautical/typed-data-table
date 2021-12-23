@@ -8,6 +8,8 @@ Typed data table is a typescript node project aiming to provide a type-safe way 
 
 [Documentation](https://mshafir.github.io/typed-data-table/)
 
+[GitHub](https://github.com/mshafir/typed-data-table)
+
 ## Installation
 
 `npm install typed-data-table`

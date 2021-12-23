@@ -17,7 +17,7 @@
     "scripts": {
         "build": "microbundle",
         "test": "jest",
-        "doc": "typedoc src/index.ts"
+        "doc": "typedoc --options typedoc.json"
     },
     "dependencies": {
         "es6-promise-pool": "~2.5.0",
