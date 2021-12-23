@@ -4,7 +4,15 @@
 
 Typed data table is a typescript node project aiming to provide a type-safe way to interact with tabular data and a basic set of useful primitives.
 
-See an example of how this library works [here](https://codesandbox.io/s/typed-data-table-examples-6wg1i?file=/src/index.ts)
+[Live example](https://codesandbox.io/s/typed-data-table-examples-6wg1i?file=/src/index.ts)
+
+[Documentation](https://mshafir.github.io/typed-data-table/)
+
+## Installation
+
+`npm install typed-data-table`
+
+## Usage
 
 ```ts
 // Let's set up some tables to work with
