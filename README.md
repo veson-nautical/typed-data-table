@@ -1,14 +1,14 @@
 # Typed Data Table
-![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg) ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg) ![Build](https://github.com/mshafir/typed-data-table/actions/workflows/build.yml/badge.svg)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/veson-nautical/typed-data-table/blob/main/LICENSE) ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg) [![Build](https://github.com/mshafir/typed-data-table/actions/workflows/build.yml/badge.svg)](https://github.com/veson-nautical/typed-data-table/actions/workflows/build.yml)
 
 
 Typed data table is a typescript node project aiming to provide a type-safe way to interact with tabular data and a basic set of useful primitives.
 
 [Live example](https://codesandbox.io/s/typed-data-table-examples-6wg1i?file=/src/index.ts)
 
-[Documentation](https://mshafir.github.io/typed-data-table/)
+[Documentation](https://veson-nautical.github.io/typed-data-table/)
 
-[GitHub](https://github.com/mshafir/typed-data-table)
+[GitHub](https://github.com/veson-nautical/typed-data-table)
 
 ## Installation
 
