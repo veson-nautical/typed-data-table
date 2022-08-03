@@ -6,9 +6,11 @@ import { deleteColumn } from "./functions/delete-column";
 import { makeSingleMap } from "./functions/make-single-map";
 import { filterNulls } from "./functions/filter-nulls";
 import { firstUniqueRowBy } from "./functions/first-unique-row-by";
-import { aggregate, aggregateByColumn, AggregationFuncMap } from "./functions/aggregate";
+import { aggregate, aggregateByColumn, AggregationFuncMap, max, mean, min, sum } from "./functions/aggregate";
 import { sortValues } from './functions/sort-values';
 import { rollingWindow } from "./functions/rolling-window";
+import { PickNumericKeys } from "./type-helpers";
+
 
 /**
  * A companion for the {@link Table} data structure when working with windowed data.
@@ -20,8 +22,8 @@ export class Window<RowType> {
         this.data = data;
     }
 
-    aggregate<OutputRowType>(aggFunc: (window: RowType[]) => OutputRowType) {
-        return new Table(this.data.map(aggFunc));
+    aggregate<OutputRowType>(aggFunc: (window: Table<RowType>) => OutputRowType) {
+        return new Table(this.data.map(window => aggFunc(new Table(window))));
     }
 }
 
@@ -307,7 +309,7 @@ export class Table<RowType> {
      * @param windowSize 
      * @returns 
      */
-     rolling(windowSize: number, on?: (row: RowType, index: number) => number, minPeriods?: number) {
+    rolling(windowSize: number, on?: (row: RowType, index: number) => number, minPeriods?: number) {
         return new Window(rollingWindow(this.data, windowSize, on, minPeriods));
     }
 
@@ -320,5 +322,65 @@ export class Table<RowType> {
      */
     sortValues(keys: (keyof RowType)[], ascending: boolean = true, inplace: boolean = false) {
         return new Table(sortValues(this.data, keys, ascending, inplace));
+    }
+
+    /**
+     * Returns the mean over the specied key
+     * @param key 
+     * @returns 
+     */
+    mean(key: keyof PickNumericKeys<RowType>) {
+        return mean(this.data.map(r => r[key] as any));
+    }
+
+    /**
+     * Returns the mean over the specied key
+     * @param key 
+     * @returns 
+     */
+    sum(key: keyof PickNumericKeys<RowType>) {
+        return sum(this.data.map(r => r[key] as any));
+    }
+
+    /**
+     * Returns the mean over the specied key
+     * @param key 
+     * @returns 
+     */
+    min(key: keyof PickNumericKeys<RowType>) {
+        return min(this.data.map(r => r[key] as any));
+    }
+
+    /**
+     * Returns the mean over the specied key
+     * @param key 
+     * @returns 
+     */
+    max(key: keyof PickNumericKeys<RowType>) {
+        return max(this.data.map(r => r[key] as any));
+    }
+
+    /**
+     * Returns the first row in the table
+     * @returns 
+     */
+    first() {
+        return this.data[0];
+    }
+
+    /**
+     * Returns the last row in the table
+     * @returns 
+     */
+    last() {
+        return this.data.slice(-1)[0];
+    }
+
+    /**
+     * Returns the row count of the table
+     * @returns 
+     */
+    size() {
+        return this.data.length;
     }
 }
