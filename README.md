@@ -86,8 +86,8 @@ purchases
   .sortValues(['timestamp'], true)
   .rolling(3)
   .aggregate(window => ({
-      timestamp: last(window).timestamp,
-      purchases: window.length,
-      amountPurchased: sum(window.map(r => r.amount))
+      timestamp: window.last().timestamp,
+      purchases: window.size(),
+      amountPurchased: window.sum('amount')
   }))
 ```
