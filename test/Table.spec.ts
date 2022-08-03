@@ -1,3 +1,4 @@
+import { last, sum } from "../src/functions/aggregate";
 import { Table } from "../src"
 
 const TestTable = new Table([
@@ -9,10 +10,10 @@ const TestTable = new Table([
 ])
 
 const TestPurchases = new Table([
-    { item: 'Cheese', customer: 1, amount: 2 },
-    { item: 'Tomato', customer: 1, amount: 1 },
-    { item: 'Apple', customer: 2, amount: 3 },
-    { item: 'Milk', customer: 3, amount: 1 },
+    { item: 'Milk', customer: 3, amount: 1, timestamp: '2021-01-05T12:00:00' },
+    { item: 'Cheese', customer: 1, amount: 2, timestamp: '2021-01-01T12:00:00' },
+    { item: 'Tomato', customer: 1, amount: 1, timestamp: '2021-01-02T12:00:00' },
+    { item: 'Apple', customer: 2, amount: 3, timestamp: '2021-01-04T12:00:00' },
 ])
 
 describe("Table", () => {
@@ -70,7 +71,33 @@ describe("Table", () => {
             inventory: 10, 
             category: 'Dairy',
             customer: 1,
-            amount: 2
+            amount: 2,
+            timestamp: "2021-01-01T12:00:00"
         })
+    })
+
+    test("sort", () => {
+        const table = TestTable.sortValues(['price'], true)
+        expect(table.data[0]).toStrictEqual({ 
+            item: 'Cucumber', 
+            price: 1.00, 
+            inventory: 15, 
+            category: 'Produce'
+        })
+    });
+
+    test("rolling", () => {
+        const purchasesRolling = TestPurchases
+            .sortValues(['timestamp'], true)
+            .rolling(3)
+            .aggregate(window => ({
+                timestamp: last(window).timestamp,
+                purchases: window.length,
+                amountPurchased: sum(window.map(r => r.amount))
+            }))
+        expect(purchasesRolling.data).toStrictEqual([
+            { timestamp: '2021-01-04T12:00:00', purchases: 3, amountPurchased: 6 },
+            { timestamp: '2021-01-05T12:00:00', purchases: 3, amountPurchased: 5 },
+        ])
     })
 })

@@ -7,6 +7,23 @@ import { makeSingleMap } from "./functions/make-single-map";
 import { filterNulls } from "./functions/filter-nulls";
 import { firstUniqueRowBy } from "./functions/first-unique-row-by";
 import { aggregate, aggregateByColumn, AggregationFuncMap } from "./functions/aggregate";
+import { sortValues } from './functions/sort-values';
+import { rollingWindow } from "./functions/rolling-window";
+
+/**
+ * A companion for the {@link Table} data structure when working with windowed data.
+ */
+export class Window<RowType> {
+    data: RowType[][];
+
+    constructor(data: RowType[][]) {
+        this.data = data;
+    }
+
+    aggregate<OutputRowType>(aggFunc: (window: RowType[]) => OutputRowType) {
+        return new Table(this.data.map(aggFunc));
+    }
+}
 
 /**
  * A companion for the {@link Table} data structure when working with grouped data.
@@ -283,5 +300,25 @@ export class Table<RowType> {
     sideEffect(func: (data: RowType[]) => void) {
         func(this.data);
         return this;
+    }
+
+    /**
+     * Returns a rolling window of the provided size over the table
+     * @param windowSize 
+     * @returns 
+     */
+     rolling(windowSize: number, on?: (row: RowType, index: number) => number, minPeriods?: number) {
+        return new Window(rollingWindow(this.data, windowSize, on, minPeriods));
+    }
+
+    /**
+     * Sorts the values in the table by the specifed keys
+     * @param keys 
+     * @param ascending 
+     * @param inplace 
+     * @returns 
+     */
+    sortValues(keys: (keyof RowType)[], ascending: boolean = true, inplace: boolean = false) {
+        return new Table(sortValues(this.data, keys, ascending, inplace));
     }
 }

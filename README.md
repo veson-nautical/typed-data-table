@@ -77,3 +77,17 @@ const groupedByCustomer = joinedPurchases
   // as the 'id' column, you can rename this back to customer if desired.
   .renameColumn("id", "customer");
 ```
+
+### Rolling
+you can compute rolling windows over the data
+
+```ts
+purchases
+  .sortValues(['timestamp'], true)
+  .rolling(3)
+  .aggregate(window => ({
+      timestamp: last(window).timestamp,
+      purchases: window.length,
+      amountPurchased: sum(window.map(r => r.amount))
+  }))
+```

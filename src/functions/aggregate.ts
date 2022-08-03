@@ -56,6 +56,8 @@ export const variance = (items: number[]) => {
     return mean(items.map(it => Math.pow(it - itemMean, 2)));
 };
 export const standardDeviation = (items: number[]) => Math.sqrt(variance(items));
+export const first = <T>(items: T[]) => items[0];
+export const last = <T>(items: T[]) => items.slice(-1)[0];
 
 /**
  * Finds the first index of the minimum value in the provide numeric list
