@@ -11,6 +11,7 @@
 export function rollingWindow<RowType>(
     data: RowType[], 
     windowSize: number, 
+    offsetSize = 1,
     on?: (row: RowType, index: number) => number,
     minPeriods?: number
 ) : RowType[][] {
@@ -23,7 +24,7 @@ export function rollingWindow<RowType>(
 
     const minPeriodsValue = minPeriods ?? (on ? 1 : windowSize)
 
-    for (let i=0; i < preparedData.length; i++) {
+    for (let i=0; i < preparedData.length; i+=offsetSize) {
         let chunk : RowType[] = [];
 
         // take from the start of the window until we pass the window size

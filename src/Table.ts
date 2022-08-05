@@ -309,8 +309,8 @@ export class Table<RowType> {
      * @param windowSize 
      * @returns 
      */
-    rolling(windowSize: number, on?: (row: RowType, index: number) => number, minPeriods?: number) {
-        return new Window(rollingWindow(this.data, windowSize, on, minPeriods));
+    rolling(windowSize: number, offsetSize = 1, on?: (row: RowType, index: number) => number, minPeriods?: number) {
+        return new Window(rollingWindow(this.data, windowSize, offsetSize, on, minPeriods));
     }
 
     /**
