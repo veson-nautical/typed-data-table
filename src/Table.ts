@@ -321,7 +321,12 @@ export class Table<RowType> {
      * @returns 
      */
     sortValues(keys: (keyof RowType)[], ascending: boolean = true, inplace: boolean = false) {
-        return new Table(sortValues(this.data, keys, ascending, inplace));
+        if (inplace) {
+            sortValues(this.data, keys, ascending, true);
+            return this;
+        } else {
+            return new Table(sortValues(this.data, keys, ascending, false));
+        }
     }
 
     /**

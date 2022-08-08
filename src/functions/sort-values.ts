@@ -14,6 +14,8 @@ export function sortValues<RowType>(data: RowType[], keys: (keyof RowType)[], as
                 continue;
             } else if (a[key] < b[key]) {
                 return ascending ? -1 : 1;
+            } else {
+                return ascending ? 1 : -1;
             }
         }
         return 0;
