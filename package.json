@@ -4,7 +4,6 @@
     "description": "A strongly typed data structure for tabular data",
     "source": "src/index.ts",
     "main": "./build/lib/index.js",
-    "exports": "./build/lib/index.modern.js",
     "module": "./build/lib/index.es.js",
     "typings": "./build/types/index.d.ts",
     "license": "MIT",
