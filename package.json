@@ -1,6 +1,6 @@
 {
     "name": "typed-data-table",
-    "version": "1.2.3",
+    "version": "1.2.4",
     "description": "A strongly typed data structure for tabular data",
     "source": "src/index.ts",
     "main": "./build/lib/index.js",
